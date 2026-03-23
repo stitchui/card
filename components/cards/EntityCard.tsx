@@ -1,8 +1,10 @@
 'use client';
 
-import { Card, CardContent, Typography, Box, IconButton, Divider } from '@mui/material';
+import { Card, CardContent, Typography, Box, IconButton } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import BusinessIcon from '@mui/icons-material/Business';
+import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
+import GradientDivider from '@/components/common/GradientDivider';
 import { EntityMetric } from '@/lib/mock-data';
 
 interface EntityCardProps {
@@ -17,61 +19,113 @@ export default function EntityCard({ metrics }: EntityCardProps) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
         border: '1px solid #e0e0e0',
         height: '100%',
-        minWidth: 375,
+        minWidth: 480,
       }}
     >
-      <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+      <CardContent
+        sx={{
+          p: 2,
+          '&.MuiCardContent-root:last-child': {
+            pb: 2,
+          },
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
+          <Box
+            sx={{
+              width: 48,
+              height: 48,
+              borderRadius: '50%',
+              backgroundColor: '#AA936C',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              border: '5px solid #E2DCD1',
+            }}
+          >
+            <BusinessIcon sx={{ color: '#fff', fontSize: 24 }} />
+          </Box>
+          <Box sx={{ flex: 1, pt: 0.5 }}>
             <Box
               sx={{
-                width: 48,
-                height: 48,
-                borderRadius: '50%',
-                backgroundColor: '#d4a574',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                mb: 1,
+                justifyContent: 'space-between',
+                px: 2,
               }}
             >
-              <BusinessIcon sx={{ color: 'white', fontSize: 24 }} />
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 600,
+                  color: '#486c94',
+                  letterSpacing: 1.5,
+                  textTransform: 'uppercase',
+                  fontSize: '1.5rem',
+                  lineHeight: 1.15,
+                  mb: 0.2,
+                }}
+              >
+                ENTITY
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.2 }}>
+                <IconButton size="small" sx={{ color: '#9ca3af' }}>
+                  <AutorenewRoundedIcon fontSize="small" />
+                </IconButton>
+                <IconButton size="small" sx={{ color: '#9ca3af' }}>
+                  <InfoOutlinedIcon fontSize="small" />
+                </IconButton>
+              </Box>
             </Box>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontWeight: 600,
-                color: '#1a365d',
-                letterSpacing: 1,
-                textTransform: 'uppercase',
-              }}
-            >
-              ENTITY
-            </Typography>
+            <GradientDivider sx={{ mt: 0.45 }} />
           </Box>
-          <IconButton size="small" sx={{ color: '#9ca3af' }}>
-            <InfoOutlinedIcon fontSize="small" />
-          </IconButton>
         </Box>
-
-        <Divider sx={{ my: 2 }} />
-
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-          {metrics.map((metric, index) => (
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 1.8,
+            position: 'relative',
+          }}
+        >
+          {metrics.map((metric) => (
             <Box
               key={metric.label}
               sx={{
+                position: 'relative',
                 flex: 1,
-                borderRight: index === 0 ? '1px solid #e5e7eb' : 'none',
-                pr: index === 0 ? 2 : 0,
-                pl: index === 1 ? 2 : 0,
+                px: 1.7,
+                pb: 0.2,
+                backgroundColor: '#ffffff',
+                borderTop: 'none',
+                borderLeft: 'none',
+                borderRight: '1px solid #d8e2eb',
+                borderBottom: '1px solid #d8e2eb',
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 12,
+                boxShadow: '2px 3px 5px -2px rgba(30, 56, 88, 0.28)',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: 0,
+                  height: 0,
+                  borderTop: '22px solid #2b9a93',
+                  borderLeft: '22px solid transparent',
+                  opacity: 0.9,
+                },
               }}
             >
               <Typography
                 variant="caption"
                 sx={{
-                  color: '#6b7280',
+                  color: '#486c94',
                   fontSize: '0.875rem',
+                  fontWeight: 500,
                   display: 'block',
                   mb: 0.5,
                 }}
@@ -82,9 +136,9 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 <Typography
                   variant="h4"
                   sx={{
-                    fontWeight: 600,
-                    color: '#1f2937',
-                    fontSize: '1.75rem',
+                    fontWeight: 500,
+                    color: '#121b2c',
+                    fontSize: '2.375rem',
                   }}
                 >
                   {metric.value}
@@ -92,9 +146,9 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 <Typography
                   variant="body2"
                   sx={{
-                    color: '#10b981',
-                    fontSize: '0.875rem',
-                    fontWeight: '600'
+                    color: '#1c8783',
+                    fontSize: '0.9375rem',
+                    fontWeight: 500,
                   }}
                 >
                   {metric.change}
